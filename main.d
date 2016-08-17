@@ -1,22 +1,32 @@
 import std.stdio;
-//import std.variant;alias var = Variant;
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Might need this.
-int[int[2]] clean;
-int[int[2]] current_board;
-int[int[2]] sum_board;
-int[int[2]] next_board;
-void display()
+
+class DefaultDict(T,U) //T=>U AKA U[T]
 {
-  foreach(key,value;current_board)
+  public U[T] val;
+  this()
   {
-    write("(");write(key[0]);write(",");write(key[1]);write(")=>");writeln(value);
   }
-}
-void clear()
-{
-  current_board=next_board;
-  next_board=clean.dup;
-  sum_board=clean.dup;
+  public U opIndex(T arg)
+  {
+    if(arg in this.val)
+    {
+      return this.val[arg];
+    }
+    else
+    {
+      return U.init;
+    }
+  }
+  public void opIndexAssign(T arg,U v)
+  {
+    if(U == U.init)
+    {
+    }
+    else
+    {
+      this.val[arg] = v;
+    }
+  }
 }
 void main(){}
 
